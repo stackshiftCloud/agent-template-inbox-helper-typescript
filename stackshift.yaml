@@ -1,0 +1,40 @@
+apiVersion: stackshift.com/v1
+kind: Application
+metadata:
+  name: inbox-helper
+spec:
+  services:
+    agent:
+      type: agent
+      startCommand: node dist/agent.js
+      port: 8080
+      agent:
+        name: Inbox helper
+        level: ask_every_time
+        wakeOn: [inbox]
+        sleepAfter: 15m
+        models:
+          - provider: anthropic
+            model: claude-sonnet-5-5
+        payWith: credits
+        budget:
+          aiCreditsPerMonth: 20000
+          aiCreditsPerRun: 2000
+          computePerDay: { NGN: "500000" }
+        inbox:
+          sendMode: replies
+        platform:
+          - mail.agent_inbox.send
+        actions:
+          - key: hand_to_owner
+            summary: Leave an email for the owner to answer
+            risk: tell_me
+            input:
+              type: object
+              required: [message_id, from, subject, reason]
+              properties:
+                message_id: { type: string, maxLength: 500 }
+                from: { type: string, maxLength: 320 }
+                subject: { type: string, maxLength: 998 }
+                reason: { type: string, maxLength: 500 }
+            output: trusted
