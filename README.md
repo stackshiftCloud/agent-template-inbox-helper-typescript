@@ -4,7 +4,7 @@ An agent with its own email address. When an email arrives it reads it and eithe
 
 - If your instructions cover the question, it replies.
 - If they do not, or it is unsure, it leaves the email for you and tells you why.
-- With no instructions, it hands over everything and uses no AI credits.
+- Until you write its instructions in `instructions.md`, it hands every email to you and uses no AI credits.
 
 What it does without asking depends on the agent's level. It starts on "Ask every time", so each reply waits for your approval. Raise the level in the agent's settings once you trust its answers.
 
@@ -22,7 +22,7 @@ Email that people send it is untrusted. The helper never follows orders written 
 From the dashboard, open Agents and choose New agent. Or from your terminal:
 
 ```bash
-stackshift agents create --name "Inbox helper" --template inbox-helper --language typescript
+stackshift agents create --name "Inbox helper" --template inbox-helper --language typescript --platform mail.agent_inbox.send
 ```
 
 Write your instructions in `instructions.md`, push, and deploy again. Then email the agent's address.

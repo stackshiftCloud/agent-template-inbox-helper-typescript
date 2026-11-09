@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": ">=0.30.0",
-    "@stackshift-cloud/agent": "^0.1.0"
+    "@stackshift-cloud/agent": "^0.1.1"
   },
   "devDependencies": {
     "@types/node": "^20.19.0",
